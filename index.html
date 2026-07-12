@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0a84ff">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Gastos 2.0">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon.svg">
+<title>Registrar Gasto 2.0</title>
+<style>
+:root{
+  --bg:#f2f2f7;--card:#fff;--text:#111;--muted:#6e6e73;--line:#e5e5ea;
+  --blue:#0a84ff;--green:#30d158;--orange:#ff9f0a;--red:#ff453a;--purple:#bf5af2;
+  --shadow:0 8px 30px rgba(0,0,0,.06)
+}
+[data-theme="dark"]{
+  --bg:#000;--card:#1c1c1e;--text:#fff;--muted:#a1a1a6;--line:#38383a;--shadow:none
+}
+*{box-sizing:border-box}
+body{
+  margin:0;background:var(--bg);color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text",Arial,sans-serif;
+  min-height:100vh;padding:env(safe-area-inset-top) 14px calc(88px + env(safe-area-inset-bottom))
+}
+.app{max-width:720px;margin:auto}
+.topbar{display:flex;align-items:center;justify-content:space-between;margin:12px 2px 14px}
+.topbar h1{font-size:30px;line-height:1.05;margin:0}
+.icon-btn{width:44px;height:44px;border:0;border-radius:14px;background:var(--card);color:var(--text);font-size:20px;box-shadow:var(--shadow)}
+.card{background:var(--card);border-radius:24px;padding:18px;margin-bottom:14px;box-shadow:var(--shadow)}
+.hero{background:linear-gradient(135deg,#0a84ff,#5e5ce6);color:#fff}
+.hero small{opacity:.82}
+.hero .big{font-size:34px;font-weight:800;margin:6px 0}
+.hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
+.hero-box{background:rgba(255,255,255,.14);border-radius:16px;padding:12px}
+.progress{height:12px;border-radius:999px;background:rgba(255,255,255,.22);overflow:hidden;margin-top:14px}
+.progress span{display:block;height:100%;background:#fff;width:0;transition:.25s}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.metric{background:var(--card);border-radius:20px;padding:16px;box-shadow:var(--shadow)}
+.metric small{color:var(--muted);display:block;margin-bottom:6px}
+.metric strong{font-size:23px}
+.section-title{display:flex;justify-content:space-between;align-items:center;margin:0 0 12px}
+.section-title h2{font-size:20px;margin:0}
+label{display:block;font-weight:650;margin:13px 0 7px}
+input,select,button,textarea{
+  width:100%;font:inherit;color:var(--text);background:var(--card);
+  border:1px solid var(--line);border-radius:15px;padding:14px
+}
+textarea{min-height:86px;resize:vertical}
+input:focus,select:focus,textarea:focus{outline:2px solid rgba(10,132,255,.22);border-color:var(--blue)}
+.primary{background:var(--blue);color:#fff;border:none;font-weight:750}
+.secondary{background:var(--line);border:none;font-weight:650}
+.danger{background:#ffe9e7;color:#a62019;border:none;font-weight:650}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.chips{display:flex;gap:8px;overflow:auto;padding-bottom:4px}
+.chip{width:auto;white-space:nowrap;padding:10px 13px;border-radius:999px;background:var(--card);border:1px solid var(--line);color:var(--text)}
+.chip.active{background:var(--blue);color:#fff;border-color:var(--blue)}
+.tx{display:flex;justify-content:space-between;gap:14px;padding:13px 0;border-bottom:1px solid var(--line)}
+.tx:last-child{border-bottom:none}
+.tx-left b{display:block}.tx-left span,.muted{color:var(--muted);font-size:13px}
+.tx-right{text-align:right}.tx-right b{display:block}
+.badge{display:inline-block;padding:4px 8px;border-radius:999px;font-size:11px;margin-top:4px}
+.synced{background:#e9f8ee;color:#1b6f35}.pending{background:#fff4dd;color:#8a5100}
+.chart-wrap{height:220px}
+canvas{width:100%;height:100%}
+.bottom-nav{
+  position:fixed;left:50%;bottom:0;transform:translateX(-50%);
+  width:min(720px,100%);padding:10px 14px calc(10px + env(safe-area-inset-bottom));
+  background:color-mix(in srgb,var(--card) 88%,transparent);backdrop-filter:blur(18px);
+  border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(4,1fr);z-index:20
+}
+.nav-btn{border:0;background:transparent;color:var(--muted);padding:8px 3px;font-size:12px}
+.nav-btn strong{display:block;font-size:20px;margin-bottom:3px}
+.nav-btn.active{color:var(--blue)}
+.view{display:none}.view.active{display:block}
+.fab{position:fixed;right:22px;bottom:92px;width:58px;height:58px;border-radius:50%;border:0;background:var(--blue);color:#fff;font-size:30px;box-shadow:0 10px 28px rgba(10,132,255,.35);z-index:15}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.35);display:none;align-items:flex-end;z-index:40}
+.modal.open{display:flex}
+.sheet{width:100%;max-width:720px;margin:auto;background:var(--bg);border-radius:28px 28px 0 0;padding:18px 16px calc(22px + env(safe-area-inset-bottom));max-height:92vh;overflow:auto}
+.sheet-head{display:flex;justify-content:space-between;align-items:center}
+.sheet-head h2{margin:0}.close{width:38px;height:38px;border-radius:50%;padding:0;background:var(--line);border:0}
+.empty{text-align:center;color:var(--muted);padding:24px 10px}
+.alert{padding:12px 14px;border-radius:14px;margin-top:12px;font-weight:650}
+.alert.ok{background:#eaf8ee;color:#146c2e}.alert.warn{background:#fff4dd;color:#8a5100}.alert.err{background:#ffe9e7;color:#9f1d15}
+.settings-group{margin-bottom:14px}
+.small-btn{width:auto;padding:9px 12px}
+@media(max-width:520px){.row,.grid2{grid-template-columns:1fr}.hero-grid{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="topbar">
+    <div><small class="muted">Controle financeiro</small><h1>Meus gastos</h1></div>
+    <button class="icon-btn" id="themeBtn" aria-label="Alternar tema">☾</button>
+  </div>
+
+  <section id="home" class="view active">
+    <div class="card hero">
+      <small>Disponível neste mês</small>
+      <div class="big" id="availableTxt">R$ 700,00</div>
+      <div class="hero-grid">
+        <div class="hero-box"><small>Meta</small><b id="goalTxt">R$ 700,00</b></div>
+        <div class="hero-box"><small>Gasto</small><b id="spentTxt">R$ 0,00</b></div>
+      </div>
+      <div class="progress"><span id="progressBar"></span></div>
+      <div id="budgetAlert"></div>
+    </div>
+
+    <div class="grid2">
+      <div class="metric"><small>Média diária</small><strong id="dailyAvg">R$ 0,00</strong></div>
+      <div class="metric"><small>Previsão do mês</small><strong id="forecast">R$ 0,00</strong></div>
+    </div>
+
+    <div class="card">
+      <div class="section-title"><h2>Gastos por cartão</h2></div>
+      <div class="chart-wrap"><canvas id="cardChart"></canvas></div>
+    </div>
+
+    <div class="card">
+      <div class="section-title"><h2>Gastos por categoria</h2></div>
+      <div class="chart-wrap"><canvas id="categoryChart"></canvas></div>
+    </div>
+
+    <div class="card">
+      <div class="section-title">
+        <h2>Últimos lançamentos</h2>
+        <button class="small-btn secondary" onclick="goTo('history')">Ver todos</button>
+      </div>
+      <div id="recentList"></div>
+    </div>
+  </section>
+
+  <section id="history" class="view">
+    <div class="card">
+      <div class="section-title"><h2>Histórico</h2></div>
+      <div class="row">
+        <input id="search" placeholder="Buscar descrição">
+        <select id="filterCard"><option value="">Todos os cartões</option></select>
+      </div>
+      <div class="chips" id="monthChips" style="margin-top:12px"></div>
+    </div>
+    <div class="card"><div id="historyList"></div></div>
+  </section>
+
+  <section id="cards" class="view">
+    <div class="card">
+      <div class="section-title"><h2>Cartões</h2><button class="small-btn primary" id="addCardBtn">Adicionar</button></div>
+      <div id="cardsList"></div>
+    </div>
+  </section>
+
+  <section id="settings" class="view">
+    <div class="card">
+      <div class="section-title"><h2>Configurações</h2></div>
+      <div class="settings-group">
+        <label>Meta mensal</label>
+        <input id="settingGoal" inputmode="decimal">
+      </div>
+      <div class="settings-group">
+        <label>URL do Google Apps Script</label>
+        <input id="settingEndpoint" placeholder="https://script.google.com/.../exec">
+      </div>
+      <div class="row">
+        <button class="primary" id="saveSettings">Salvar</button>
+        <button class="secondary" id="syncBtn">Sincronizar</button>
+      </div>
+      <button class="secondary" id="exportBtn">Exportar CSV</button>
+      <button class="danger" id="clearBtn">Apagar dados locais</button>
+      <div id="settingsMsg"></div>
+    </div>
+  </section>
+</div>
+
+<button class="fab" id="openExpense">+</button>
+
+<nav class="bottom-nav">
+  <button class="nav-btn active" data-view="home"><strong>⌂</strong>Início</button>
+  <button class="nav-btn" data-view="history"><strong>≡</strong>Histórico</button>
+  <button class="nav-btn" data-view="cards"><strong>▣</strong>Cartões</button>
+  <button class="nav-btn" data-view="settings"><strong>⚙</strong>Ajustes</button>
+</nav>
+
+<div class="modal" id="expenseModal">
+  <div class="sheet">
+    <div class="sheet-head"><h2 id="expenseTitle">Novo gasto</h2><button class="close" data-close="expenseModal">×</button></div>
+    <form id="expenseForm">
+      <input type="hidden" id="expenseId">
+      <div class="row">
+        <div><label>Cartão</label><select id="expenseCard" required></select></div>
+        <div><label>Valor</label><input id="expenseValue" inputmode="decimal" placeholder="0,00" required></div>
+      </div>
+      <label>Descrição</label><input id="expenseDescription" placeholder="Ex.: mercado, almoço..." required>
+      <div class="row">
+        <div><label>Categoria</label><select id="expenseCategory" required></select></div>
+        <div><label>Data</label><input id="expenseDate" type="date" required></div>
+      </div>
+      <label>Observação</label><textarea id="expenseNote" placeholder="Opcional"></textarea>
+      <button class="primary" type="submit">Salvar gasto</button>
+      <button class="danger" type="button" id="deleteExpense" style="display:none">Excluir gasto</button>
+      <div id="expenseMsg"></div>
+    </form>
+  </div>
+</div>
+
+<div class="modal" id="cardModal">
+  <div class="sheet">
+    <div class="sheet-head"><h2>Novo cartão</h2><button class="close" data-close="cardModal">×</button></div>
+    <form id="cardForm">
+      <input type="hidden" id="cardId">
+      <label>Nome</label><input id="cardName" required placeholder="Ex.: Nubank">
+      <div class="row">
+        <div><label>Limite</label><input id="cardLimit" inputmode="decimal" placeholder="0,00"></div>
+        <div><label>Dia de fechamento</label><input id="cardCloseDay" inputmode="numeric" placeholder="24"></div>
+      </div>
+      <label>Dia de vencimento</label><input id="cardDueDay" inputmode="numeric" placeholder="1">
+      <button class="primary" type="submit">Salvar cartão</button>
+    </form>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+function doPost(e){
+  try{
+    const ss=SpreadsheetApp.getActiveSpreadsheet();
+    const sh=ss.getSheetByName('Gastos');
+    if(!sh) throw new Error('A aba Gastos não foi encontrada.');
+    const body=JSON.parse(e.postData.contents||'{}');
+    const exp=body.expense||body;
+    const id=String(exp.id||'');
+    if(!id) throw new Error('ID do gasto ausente.');
+
+    const last=sh.getLastRow();
+    let row=0;
+    if(last>1){
+      const ids=sh.getRange(2,7,last-1,1).getValues().flat();
+      const idx=ids.indexOf(id);
+      if(idx>=0) row=idx+2;
+    }
+
+    const values=[[
+      new Date(exp.date+'T12:00:00'),
+      String(exp.cardId||''),
+      String(exp.description||''),
+      String(exp.category||'Outros'),
+      Number(exp.value||0),
+      String(exp.note||''),
+      id,
+      new Date()
+    ]];
+
+    if(row) sh.getRange(row,1,1,8).setValues(values);
+    else sh.getRange(sh.getLastRow()+1,1,1,8).setValues(values);
+
+    return json({ok:true});
+  }catch(err){
+    return json({ok:false,message:err.message});
+  }
+}
+function json(obj){
+  return ContentService.createTextOutput(JSON.stringify(obj)).setMimeType(ContentService.MimeType.JSON);
+}
