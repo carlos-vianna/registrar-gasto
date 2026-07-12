@@ -1,33 +1,25 @@
-# Meus Gastos — v3.0
+# Meus Gastos — Edição Final v4.0
 
-Substitua no repositório os arquivos:
+Substitua os arquivos do repositório por estes arquivos.
 
-- index.html
-- app.js
-- manifest.webmanifest
-- sw.js
-- icon.svg
-- AppsScript.gs
+## Melhorias finais
 
-## Principais melhorias
-
-- Cadastro, edição e exclusão de gastos
-- Cadastro e exclusão segura de cartões
-- Dashboard por mês
-- Meta, média diária e previsão
-- Gráficos simples sem biblioteca externa
-- Busca e filtros
-- Modo escuro
-- Backup e restauração em JSON
-- Exportação CSV
-- Funcionamento offline
+- Migração automática dos dados da versão anterior
+- Registro rápido por texto: “Pizza 89,90 Nubank”
+- Parcelamento em até 24 vezes
+- Gastos recorrentes mensais
+- Orçamento por categoria
+- Comparação com o mês anterior
+- Previsão mensal e média diária
+- Limites individuais dos cartões
+- Backup, restauração e CSV
+- Modo claro/escuro
+- PWA offline e atualização de cache
 - Sincronização opcional com Google Sheets
-- Correções de segurança na exibição de textos
-- Atualização mais confiável do cache no iPhone
 
-## Planilha Google Sheets
+## Google Sheets
 
-A aba `Gastos` deve ter:
+A aba `Gastos` pode usar estes cabeçalhos:
 
 A Data
 B Cartão
@@ -37,5 +29,7 @@ E Valor
 F Observação
 G ID
 H Atualizado em
+I Parcela
+J Recorrência
 
-Cole `AppsScript.gs` em Extensões > Apps Script e publique como Aplicativo da Web.
+Depois de substituir os arquivos no GitHub, faça o commit e aguarde o GitHub Pages atualizar.

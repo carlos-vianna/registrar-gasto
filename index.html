@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#0a84ff">
+<meta name="theme-color" content="#0A84FF">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="Meus Gastos">
@@ -11,90 +11,35 @@
 <link rel="apple-touch-icon" href="icon.svg">
 <title>Meus Gastos</title>
 <style>
-:root{--bg:#f2f2f7;--card:#fff;--text:#111;--muted:#6e6e73;--line:#e5e5ea;--blue:#0a84ff;--green:#30d158;--orange:#ff9f0a;--red:#ff453a;--shadow:0 8px 28px rgba(0,0,0,.07)}
+:root{--bg:#f2f2f7;--card:#fff;--text:#111;--muted:#6e6e73;--line:#e5e5ea;--blue:#0a84ff;--green:#30d158;--orange:#ff9f0a;--red:#ff453a;--purple:#bf5af2;--shadow:0 8px 30px rgba(0,0,0,.07)}
 [data-theme="dark"]{--bg:#000;--card:#1c1c1e;--text:#fff;--muted:#a1a1a6;--line:#38383a;--shadow:none}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text",Arial,sans-serif;padding:env(safe-area-inset-top) 14px calc(86px + env(safe-area-inset-bottom));min-height:100vh}
-.app{max-width:720px;margin:auto}.top{display:flex;justify-content:space-between;align-items:center;margin:10px 2px 14px}.top h1{margin:0;font-size:30px}.icon{width:44px;height:44px;border:0;border-radius:14px;background:var(--card);color:var(--text);box-shadow:var(--shadow);font-size:20px}
-.card{background:var(--card);border-radius:24px;padding:18px;margin-bottom:14px;box-shadow:var(--shadow)}.hero{background:linear-gradient(135deg,#0a84ff,#5e5ce6);color:#fff}.hero .amount{font-size:36px;font-weight:800;margin:6px 0}.hero-grid,.grid2,.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}.box{background:rgba(255,255,255,.15);border-radius:16px;padding:12px}.progress{height:12px;background:rgba(255,255,255,.22);border-radius:999px;overflow:hidden;margin-top:14px}.progress span{height:100%;display:block;background:#fff;width:0}
-.metric{background:var(--card);border-radius:20px;padding:16px;box-shadow:var(--shadow)}.metric small,.muted{color:var(--muted)}.metric strong{display:block;font-size:22px;margin-top:4px}.section-title{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}.section-title h2{margin:0;font-size:20px}
-label{display:block;font-weight:650;margin:13px 0 7px}input,select,textarea,button{width:100%;font:inherit;border-radius:15px;border:1px solid var(--line);padding:14px;background:var(--card);color:var(--text)}textarea{min-height:80px}.primary{background:var(--blue);color:#fff;border:none;font-weight:750}.secondary{background:var(--line);border:none;font-weight:650}.danger{background:#ffe9e7;color:#a62019;border:none;font-weight:650}.small{width:auto;padding:9px 12px}
-.tx{display:flex;justify-content:space-between;gap:14px;padding:13px 0;border-bottom:1px solid var(--line)}.tx:last-child{border-bottom:none}.tx b{display:block}.tx span{font-size:13px;color:var(--muted)}.right{text-align:right}
-.chips{display:flex;gap:8px;overflow:auto}.chip{width:auto;white-space:nowrap;padding:10px 13px;border-radius:999px}.chip.active{background:var(--blue);color:#fff;border-color:var(--blue)}
-.alert{padding:12px 14px;border-radius:14px;margin-top:12px;font-weight:650}.ok{background:#eaf8ee;color:#146c2e}.warn{background:#fff4dd;color:#8a5100}.err{background:#ffe9e7;color:#9f1d15}
-.view{display:none}.view.active{display:block}.empty{text-align:center;color:var(--muted);padding:24px 8px}
-.bottom{position:fixed;left:50%;bottom:0;transform:translateX(-50%);width:min(720px,100%);display:grid;grid-template-columns:repeat(4,1fr);padding:9px 12px calc(9px + env(safe-area-inset-bottom));background:color-mix(in srgb,var(--card) 88%,transparent);backdrop-filter:blur(18px);border-top:1px solid var(--line);z-index:20}.nav{border:0;background:transparent;color:var(--muted);font-size:12px;padding:7px 2px}.nav strong{display:block;font-size:20px}.nav.active{color:var(--blue)}
-.fab{position:fixed;right:22px;bottom:92px;width:58px;height:58px;border-radius:50%;border:0;background:var(--blue);color:#fff;font-size:30px;box-shadow:0 10px 28px rgba(10,132,255,.35);z-index:15}
-.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.35);align-items:flex-end;z-index:40}.modal.open{display:flex}.sheet{width:100%;max-width:720px;margin:auto;background:var(--bg);border-radius:28px 28px 0 0;padding:18px 16px calc(22px + env(safe-area-inset-bottom));max-height:92vh;overflow:auto}.sheet-head{display:flex;justify-content:space-between;align-items:center}.sheet-head h2{margin:0}.close{width:38px;height:38px;border-radius:50%;padding:0;background:var(--line);border:0}
-.chart{display:flex;flex-direction:column;gap:10px}.bar-row{display:grid;grid-template-columns:105px 1fr 82px;gap:8px;align-items:center;font-size:13px}.bar-bg{height:18px;background:var(--line);border-radius:999px;overflow:hidden}.bar-fill{height:100%;background:var(--blue)}
-@media(max-width:520px){.row,.grid2{grid-template-columns:1fr}.hero-grid{grid-template-columns:1fr 1fr}.bar-row{grid-template-columns:90px 1fr 75px}}
+*{box-sizing:border-box}html{background:var(--bg)}body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text",Arial,sans-serif;min-height:100vh;padding:env(safe-area-inset-top) 14px calc(92px + env(safe-area-inset-bottom))}.app{max-width:760px;margin:auto}.top{display:flex;justify-content:space-between;align-items:center;margin:10px 2px 14px}.top h1{margin:0;font-size:30px}.top-actions{display:flex;gap:8px}.icon-btn{width:44px;height:44px;border:0;border-radius:14px;background:var(--card);color:var(--text);box-shadow:var(--shadow);font-size:19px}.card{background:var(--card);border-radius:24px;padding:18px;margin-bottom:14px;box-shadow:var(--shadow)}.hero{background:linear-gradient(135deg,#0a84ff,#5e5ce6);color:#fff}.hero .amount{font-size:37px;font-weight:800;margin:6px 0}.hero-grid,.grid2,.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}.hero-box{background:rgba(255,255,255,.15);border-radius:16px;padding:12px}.progress{height:12px;background:rgba(255,255,255,.22);border-radius:999px;overflow:hidden;margin-top:14px}.progress span{height:100%;display:block;background:#fff;width:0;transition:.25s}.metric{background:var(--card);border-radius:20px;padding:16px;box-shadow:var(--shadow)}.metric small,.muted{color:var(--muted)}.metric strong{display:block;font-size:22px;margin-top:4px}.section-title{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:12px}.section-title h2{margin:0;font-size:20px}.section-title p{margin:3px 0 0;color:var(--muted);font-size:13px}label{display:block;font-weight:650;margin:13px 0 7px}input,select,textarea,button{width:100%;font:inherit;border-radius:15px;border:1px solid var(--line);padding:14px;background:var(--card);color:var(--text)}textarea{min-height:80px;resize:vertical}input:focus,select:focus,textarea:focus{outline:2px solid rgba(10,132,255,.22);border-color:var(--blue)}.primary{background:var(--blue);color:#fff;border:none;font-weight:750}.secondary{background:var(--line);border:none;font-weight:650}.danger{background:#ffe9e7;color:#a62019;border:none;font-weight:650}.small{width:auto;padding:9px 12px}.tx{display:flex;justify-content:space-between;gap:14px;padding:13px 0;border-bottom:1px solid var(--line);cursor:pointer}.tx:last-child{border-bottom:none}.tx b{display:block}.tx span{font-size:13px;color:var(--muted)}.right{text-align:right}.chips{display:flex;gap:8px;overflow:auto;padding-bottom:2px}.chip{width:auto;white-space:nowrap;padding:10px 13px;border-radius:999px}.chip.active{background:var(--blue);color:#fff;border-color:var(--blue)}.alert{padding:12px 14px;border-radius:14px;margin-top:12px;font-weight:650}.ok{background:#eaf8ee;color:#146c2e}.warn{background:#fff4dd;color:#8a5100}.err{background:#ffe9e7;color:#9f1d15}.view{display:none}.view.active{display:block}.empty{text-align:center;color:var(--muted);padding:24px 8px}.bottom{position:fixed;left:50%;bottom:0;transform:translateX(-50%);width:min(760px,100%);display:grid;grid-template-columns:repeat(4,1fr);padding:9px 12px calc(9px + env(safe-area-inset-bottom));background:color-mix(in srgb,var(--card) 88%,transparent);backdrop-filter:blur(18px);border-top:1px solid var(--line);z-index:20}.nav{border:0;background:transparent;color:var(--muted);font-size:12px;padding:7px 2px}.nav strong{display:block;font-size:20px}.nav.active{color:var(--blue)}.fab{position:fixed;right:22px;bottom:96px;width:60px;height:60px;border-radius:50%;border:0;background:var(--blue);color:#fff;font-size:31px;box-shadow:0 10px 28px rgba(10,132,255,.35);z-index:15}.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.38);align-items:flex-end;z-index:40}.modal.open{display:flex}.sheet{width:100%;max-width:760px;margin:auto;background:var(--bg);border-radius:28px 28px 0 0;padding:18px 16px calc(22px + env(safe-area-inset-bottom));max-height:94vh;overflow:auto}.sheet-head{display:flex;justify-content:space-between;align-items:center}.sheet-head h2{margin:0}.close{width:38px;height:38px;border-radius:50%;padding:0;background:var(--line);border:0}.chart{display:flex;flex-direction:column;gap:10px}.bar-row{display:grid;grid-template-columns:112px 1fr 84px;gap:8px;align-items:center;font-size:13px}.bar-bg{height:18px;background:var(--line);border-radius:999px;overflow:hidden}.bar-fill{height:100%;background:var(--blue)}.quick{display:grid;grid-template-columns:1fr auto;gap:10px}.quick button{width:auto}.badge{display:inline-block;padding:4px 8px;border-radius:999px;font-size:11px;margin-top:4px}.synced{background:#e9f8ee;color:#1b6f35}.pending{background:#fff4dd;color:#8a5100}.recurring{background:#eee8ff;color:#5d2ba7}.installment{background:#e9f1ff;color:#245db4}.stat-delta{font-size:13px;margin-top:5px}.positive{color:var(--green)}.negative{color:var(--red)}.budget-item{padding:12px 0;border-bottom:1px solid var(--line)}.budget-item:last-child{border-bottom:0}.budget-head{display:flex;justify-content:space-between;gap:12px}.budget-track{height:9px;background:var(--line);border-radius:999px;overflow:hidden;margin-top:8px}.budget-track span{display:block;height:100%;background:var(--blue)}.toast{position:fixed;left:50%;bottom:100px;transform:translateX(-50%);background:#1c1c1e;color:#fff;padding:12px 16px;border-radius:14px;z-index:80;display:none;max-width:90%;box-shadow:0 10px 28px rgba(0,0,0,.25)}.toast.show{display:block}.install-banner{display:none;background:#eaf3ff;color:#1456a0;padding:12px 14px;border-radius:14px;margin-bottom:14px}.install-banner.show{display:flex;align-items:center;justify-content:space-between;gap:10px}.install-banner button{width:auto;padding:8px 12px;background:#0a84ff;color:#fff;border:0}.hidden{display:none!important}
+@media(max-width:540px){.row,.grid2{grid-template-columns:1fr}.hero-grid{grid-template-columns:1fr 1fr}.bar-row{grid-template-columns:92px 1fr 74px}.quick{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 <div class="app">
-  <div class="top"><div><small class="muted">Controle mensal</small><h1>Meus gastos</h1></div><button id="themeBtn" class="icon">☾</button></div>
-
-  <section id="home" class="view active">
-    <div class="card hero">
-      <small>Disponível neste mês</small>
-      <div id="available" class="amount">R$ 700,00</div>
-      <div class="hero-grid"><div class="box"><small>Meta</small><b id="goal">R$ 700,00</b></div><div class="box"><small>Gasto</small><b id="spent">R$ 0,00</b></div></div>
-      <div class="progress"><span id="progress"></span></div><div id="budgetAlert"></div>
-    </div>
-    <div class="grid2"><div class="metric"><small>Média diária</small><strong id="avg">R$ 0,00</strong></div><div class="metric"><small>Previsão do mês</small><strong id="forecast">R$ 0,00</strong></div></div>
-    <div class="card"><div class="section-title"><h2>Por cartão</h2></div><div id="cardChart" class="chart"></div></div>
-    <div class="card"><div class="section-title"><h2>Por categoria</h2></div><div id="catChart" class="chart"></div></div>
-    <div class="card"><div class="section-title"><h2>Últimos gastos</h2><button class="secondary small" data-go="history">Ver todos</button></div><div id="recent"></div></div>
-  </section>
-
-  <section id="history" class="view">
-    <div class="card"><div class="section-title"><h2>Histórico</h2></div><div class="row"><input id="search" placeholder="Buscar descrição"><select id="filterCard"></select></div><div id="months" class="chips" style="margin-top:12px"></div></div>
-    <div class="card"><div id="historyList"></div></div>
-  </section>
-
-  <section id="cards" class="view">
-    <div class="card"><div class="section-title"><h2>Cartões</h2><button id="addCard" class="primary small">Adicionar</button></div><div id="cardsList"></div></div>
-  </section>
-
-  <section id="settings" class="view">
-    <div class="card"><div class="section-title"><h2>Ajustes</h2></div>
-      <label>Meta mensal</label><input id="settingGoal" inputmode="decimal">
-      <label>URL do Google Apps Script</label><input id="endpoint" placeholder="https://script.google.com/.../exec">
-      <div class="row" style="margin-top:14px"><button id="saveSettings" class="primary">Salvar</button><button id="sync" class="secondary">Sincronizar</button></div>
-      <button id="backup" class="secondary">Exportar backup JSON</button>
-      <label>Importar backup</label><input id="restore" type="file" accept="application/json">
-      <button id="exportCsv" class="secondary">Exportar CSV</button>
-      <button id="clear" class="danger">Apagar dados locais</button>
-      <div id="settingsMsg"></div>
-    </div>
-  </section>
+<div class="top"><div><small class="muted">Controle financeiro pessoal</small><h1>Meus gastos</h1></div><div class="top-actions"><button id="themeBtn" class="icon-btn" aria-label="Alternar tema">☾</button></div></div>
+<div id="installBanner" class="install-banner"><span>Instale este app na tela inicial.</span><button id="installBtn">Instalar</button></div>
+<section id="home" class="view active">
+<div class="card hero"><small>Disponível neste mês</small><div id="available" class="amount">R$ 700,00</div><div class="hero-grid"><div class="hero-box"><small>Meta</small><b id="goal">R$ 700,00</b></div><div class="hero-box"><small>Gasto</small><b id="spent">R$ 0,00</b></div></div><div class="progress"><span id="progress"></span></div><div id="budgetAlert"></div></div>
+<div class="card"><div class="section-title"><div><h2>Registro rápido</h2><p>Ex.: “Pizza 89,90 Nubank”</p></div></div><div class="quick"><input id="quickInput" placeholder="Digite valor, descrição e cartão"><button id="quickAdd" class="primary">Adicionar</button></div><div id="quickMsg"></div></div>
+<div class="grid2"><div class="metric"><small>Média diária</small><strong id="avg">R$ 0,00</strong></div><div class="metric"><small>Previsão do mês</small><strong id="forecast">R$ 0,00</strong></div><div class="metric"><small>Mês anterior</small><strong id="previousMonth">R$ 0,00</strong><div id="monthDelta" class="stat-delta"></div></div><div class="metric"><small>Maior categoria</small><strong id="topCategory">—</strong></div></div>
+<div class="card"><div class="section-title"><div><h2>Orçamento por categoria</h2><p>Limites opcionais para controlar excessos.</p></div><button id="editBudgets" class="secondary small">Configurar</button></div><div id="budgetList"></div></div>
+<div class="card"><div class="section-title"><h2>Por cartão</h2></div><div id="cardChart" class="chart"></div></div>
+<div class="card"><div class="section-title"><h2>Por categoria</h2></div><div id="catChart" class="chart"></div></div>
+<div class="card"><div class="section-title"><h2>Últimos gastos</h2><button class="secondary small" data-go="history">Ver todos</button></div><div id="recent"></div></div>
+</section>
+<section id="history" class="view"><div class="card"><div class="section-title"><h2>Histórico</h2><button id="processRecurring" class="secondary small">Gerar recorrentes</button></div><div class="row"><input id="search" placeholder="Buscar descrição"><select id="filterCard"></select></div><div id="months" class="chips" style="margin-top:12px"></div></div><div class="card"><div id="historyList"></div></div></section>
+<section id="cards" class="view"><div class="card"><div class="section-title"><h2>Cartões</h2><button id="addCard" class="primary small">Adicionar</button></div><div id="cardsList"></div></div></section>
+<section id="settings" class="view"><div class="card"><div class="section-title"><h2>Ajustes</h2></div><label>Meta mensal</label><input id="settingGoal" inputmode="decimal"><label>URL do Google Apps Script</label><input id="endpoint" placeholder="https://script.google.com/.../exec"><div class="row" style="margin-top:14px"><button id="saveSettings" class="primary">Salvar</button><button id="sync" class="secondary">Sincronizar</button></div><button id="backup" class="secondary">Exportar backup JSON</button><label>Importar backup</label><input id="restore" type="file" accept="application/json"><button id="exportCsv" class="secondary">Exportar CSV</button><button id="clear" class="danger">Apagar dados locais</button><div id="settingsMsg"></div></div></section>
 </div>
-
 <button id="newExpense" class="fab">+</button>
-<nav class="bottom">
-<button class="nav active" data-view="home"><strong>⌂</strong>Início</button>
-<button class="nav" data-view="history"><strong>≡</strong>Histórico</button>
-<button class="nav" data-view="cards"><strong>▣</strong>Cartões</button>
-<button class="nav" data-view="settings"><strong>⚙</strong>Ajustes</button>
-</nav>
-
-<div id="expenseModal" class="modal"><div class="sheet">
-<div class="sheet-head"><h2 id="expenseTitle">Novo gasto</h2><button class="close" data-close="expenseModal">×</button></div>
-<form id="expenseForm"><input type="hidden" id="expenseId">
-<div class="row"><div><label>Cartão</label><select id="expenseCard"></select></div><div><label>Valor</label><input id="expenseValue" inputmode="decimal" placeholder="0,00" required></div></div>
-<label>Descrição</label><input id="expenseDescription" required placeholder="Ex.: mercado, almoço">
-<div class="row"><div><label>Categoria</label><select id="expenseCategory"></select></div><div><label>Data</label><input id="expenseDate" type="date" required></div></div>
-<label>Observação</label><textarea id="expenseNote" placeholder="Opcional"></textarea>
-<button class="primary" type="submit">Salvar gasto</button><button id="deleteExpense" class="danger" type="button" style="display:none">Excluir gasto</button><div id="expenseMsg"></div>
-</form></div></div>
-
-<div id="cardModal" class="modal"><div class="sheet">
-<div class="sheet-head"><h2>Cartão</h2><button class="close" data-close="cardModal">×</button></div>
-<form id="cardForm"><input type="hidden" id="cardId">
-<label>Nome</label><input id="cardName" required>
-<div class="row"><div><label>Limite</label><input id="cardLimit" inputmode="decimal"></div><div><label>Fechamento</label><input id="cardClose" inputmode="numeric"></div></div>
-<label>Vencimento</label><input id="cardDue" inputmode="numeric">
-<button class="primary" type="submit">Salvar cartão</button><button id="deleteCard" class="danger" type="button" style="display:none">Excluir cartão</button>
-</form></div></div>
-
+<nav class="bottom"><button class="nav active" data-view="home"><strong>⌂</strong>Início</button><button class="nav" data-view="history"><strong>≡</strong>Histórico</button><button class="nav" data-view="cards"><strong>▣</strong>Cartões</button><button class="nav" data-view="settings"><strong>⚙</strong>Ajustes</button></nav>
+<div id="expenseModal" class="modal"><div class="sheet"><div class="sheet-head"><h2 id="expenseTitle">Novo gasto</h2><button class="close" data-close="expenseModal">×</button></div><form id="expenseForm"><input type="hidden" id="expenseId"><div class="row"><div><label>Cartão</label><select id="expenseCard"></select></div><div><label>Valor total</label><input id="expenseValue" inputmode="decimal" placeholder="0,00" required></div></div><label>Descrição</label><input id="expenseDescription" required placeholder="Ex.: mercado, almoço"><div class="row"><div><label>Categoria</label><select id="expenseCategory"></select></div><div><label>Data</label><input id="expenseDate" type="date" required></div></div><div class="row"><div><label>Parcelas</label><select id="expenseInstallments"></select></div><div><label>Recorrência</label><select id="expenseRecurring"><option value="none">Não repetir</option><option value="monthly">Mensal</option></select></div></div><label>Observação</label><textarea id="expenseNote" placeholder="Opcional"></textarea><button class="primary" type="submit">Salvar gasto</button><button id="deleteExpense" class="danger" type="button" style="display:none">Excluir gasto</button><div id="expenseMsg"></div></form></div></div>
+<div id="cardModal" class="modal"><div class="sheet"><div class="sheet-head"><h2>Cartão</h2><button class="close" data-close="cardModal">×</button></div><form id="cardForm"><input type="hidden" id="cardId"><label>Nome</label><input id="cardName" required><div class="row"><div><label>Limite</label><input id="cardLimit" inputmode="decimal"></div><div><label>Fechamento</label><input id="cardClose" inputmode="numeric"></div></div><label>Vencimento</label><input id="cardDue" inputmode="numeric"><button class="primary" type="submit">Salvar cartão</button><button id="deleteCard" class="danger" type="button" style="display:none">Excluir cartão</button></form></div></div>
+<div id="budgetModal" class="modal"><div class="sheet"><div class="sheet-head"><h2>Orçamento por categoria</h2><button class="close" data-close="budgetModal">×</button></div><div id="budgetFields"></div><button id="saveBudgets" class="primary">Salvar orçamentos</button></div></div>
+<div id="toast" class="toast"></div>
 <script src="app.js"></script>
-</body></html>
+</body>
+</html>
