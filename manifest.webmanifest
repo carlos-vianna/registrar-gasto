@@ -1,6 +1,6 @@
 {
-  "name": "Registrar Gasto 2.0",
-  "short_name": "Gastos 2.0",
+  "name": "Meus Gastos",
+  "short_name": "Gastos",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#f2f2f7",
