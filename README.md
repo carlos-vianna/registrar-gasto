@@ -1,35 +1,39 @@
-# Meus Gastos — Edição Final v4.0
+# Meus Gastos v5 — Sincronização em nuvem
 
-Substitua os arquivos do repositório por estes arquivos.
+## O que mudou
 
-## Melhorias finais
+- O histórico é baixado automaticamente da planilha ao abrir o aplicativo.
+- Cada novo gasto é enviado automaticamente ao Google Sheets.
+- Gastos editados são atualizados na mesma linha pelo ID.
+- Gastos excluídos são removidos da planilha.
+- Linhas vazias da planilha são ignoradas.
+- Ao trocar de navegador ou aparelho, o histórico volta automaticamente.
+- Se estiver sem internet, o gasto fica pendente e é enviado quando a conexão voltar.
 
-- Migração automática dos dados da versão anterior
-- Registro rápido por texto: “Pizza 89,90 Nubank”
-- Parcelamento em até 24 vezes
-- Gastos recorrentes mensais
-- Orçamento por categoria
-- Comparação com o mês anterior
-- Previsão mensal e média diária
-- Limites individuais dos cartões
-- Backup, restauração e CSV
-- Modo claro/escuro
-- PWA offline e atualização de cache
-- Sincronização opcional com Google Sheets
+## Atualização obrigatória do Apps Script
 
-## Google Sheets
+1. Na planilha, abra `Extensões > Apps Script`.
+2. Substitua o código pelo conteúdo de `AppsScript.gs`.
+3. Clique em `Implantar > Gerenciar implantações`.
+4. Edite a implantação existente.
+5. Em **Versão**, escolha `Nova versão`.
+6. Confirme que o acesso está como `Qualquer pessoa`.
+7. Clique em `Implantar`.
 
-A aba `Gastos` pode usar estes cabeçalhos:
+A URL já está configurada no aplicativo.
 
-A Data
-B Cartão
-C Descrição
-D Categoria
-E Valor
-F Observação
-G ID
-H Atualizado em
-I Parcela
-J Recorrência
+## Publicação no GitHub
 
-Depois de substituir os arquivos no GitHub, faça o commit e aguarde o GitHub Pages atualizar.
+Substitua:
+
+- index.html
+- app.js
+- AppsScript.gs
+- manifest.webmanifest
+- sw.js
+- icon.svg
+- README.md
+
+Commit sugerido:
+
+`feat: adicionar sincronizacao automatica com Google Sheets`
